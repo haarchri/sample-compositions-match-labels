@@ -1,0 +1,8 @@
+apiVersion: example.crossplane.io/v1alpha1
+kind: NetworkRtbSample
+metadata:
+  name: network-rtb-sample
+  namespace: default
+spec:
+  rtbName: my-rtb
+  vpcName: my-vpc

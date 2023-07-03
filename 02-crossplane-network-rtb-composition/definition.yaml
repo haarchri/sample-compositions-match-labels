@@ -1,0 +1,32 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xnetworkrtbsamples.example.crossplane.io
+spec:
+  defaultCompositionRef:
+    name: network-rtb-sample
+  group: example.crossplane.io
+  claimNames:
+    kind: NetworkRtbSample
+    plural: networkrtbsamples
+  names:
+    kind: XNetworkRtbSample
+    plural: xnetworkrtbsamples
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              rtbName:
+                type: string
+              vpcName:
+                type: string
+            required:
+            - rtbName
+            - vpcName

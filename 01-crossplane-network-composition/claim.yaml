@@ -1,0 +1,7 @@
+apiVersion: example.crossplane.io/v1alpha1
+kind: NetworkSample
+metadata:
+  name: network-sample
+  namespace: default
+spec:
+  vpcName: my-vpc

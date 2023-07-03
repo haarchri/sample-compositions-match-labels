@@ -1,0 +1,31 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: network-rtb-sample
+  labels:
+    provider: aws
+spec:
+  compositeTypeRef:
+    apiVersion: example.crossplane.io/v1alpha1
+    kind: XNetworkRtbSample
+  resources:
+
+  - name: routetable
+    base:
+      apiVersion: ec2.aws.upbound.io/v1beta1
+      kind: RouteTable
+      metadata:
+        labels:
+          resource: "routeTable"
+      spec:
+        forProvider:
+          region: eu-central-1
+          vpcIdSelector:
+            # matchControllerRef: true not use this - when you want to match controlplane wide !
+            matchLabels:
+              resource: "vpc"
+    patches:
+    - fromFieldPath: spec.rtbName
+      toFieldPath: metadata.labels.name
+    - fromFieldPath: spec.vpcName
+      toFieldPath: spec.forProvider.vpcIdSelector.matchLabels[name]
